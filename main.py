@@ -4,38 +4,52 @@ from game_logic import Game
 from utils import *
 
 def main():
-    # Pygame Init
+    """
+    Entry point of the game to initialize Pygame and start the game loop.
+    """
+    # Initialize Pygame modules
     pygame.init()
+    
+    # Set up the display window
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
     pygame.display.set_caption("Python Snake Game - Linked List Edition")
     
+    # Clock object to control the frame rate
     clock = pygame.time.Clock()
+    
+    # Font for rendering text
     font = pygame.font.SysFont("Arial", 24, bold=True)
     
+    # Instantiate the Game logic class
     game = Game()
     
     running = True
     while running:
-        # Event Handling
+        # --- Event Handling ---
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
+                # Quit the game if window close button is pressed
                 running = False
             elif event.type == pygame.KEYDOWN:
+                # Check for restart command when game is over
                 if game.game_over and event.key == pygame.K_r:
-                    game = Game() # Restart
+                    game = Game() # Reset game state
                 else:
+                    # Pass other potential inputs to game logic (movement)
                     game.handle_input(event)
         
-        # Update
+        # --- Game Logic Update ---
         game.update()
         
-        # Draw
+        # --- Rendering / Drawing ---
         game.draw(screen, font)
         
-        # Render
+        # Flip the display buffer to show new frame
         pygame.display.flip()
         
-        # Frame Rate (Level arttıkça hızlanır)
+        # --- Frame Rate Control ---
+        # Limits the game to 'game.speed' frames per second
+        # As level increases, speed increases, making the loop run faster
         clock.tick(game.speed)
 
     pygame.quit()
