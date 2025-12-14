@@ -12,7 +12,7 @@ def main():
     
     # Set up the display window
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
-    pygame.display.set_caption("Python Snake Game - Linked List Edition")
+    pygame.display.set_caption("Team Bubble - Python Snake Game - Linked List Implementation")
     
     # Clock object to control the frame rate
     clock = pygame.time.Clock()
