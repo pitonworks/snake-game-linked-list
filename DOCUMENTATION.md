@@ -1,54 +1,54 @@
-# Python Snake Game with Linked List - Proje Dokümantasyonu
+# Python Snake Game with Linked List - Project Documentation
 
-Bu proje, Python programlama dili ve Pygame kütüphanesi kullanılarak geliştirilmiş klasik bir Yılan (Snake) oyunudur. Projenin ana amacı, **Linked List (Bağlı Liste)** veri yapısının gerçek bir uygulama üzerinde nasıl kullanıldığını göstermektir.
+This project is a classic Snake game developed using the Python programming language and the Pygame library. The main objective of the project is to demonstrate how the **Linked List** data structure is used in a real-world application.
 
-## Kurulum ve Çalıştırma
+## Installation and Execution
 
-1. Python'un yüklü olduğundan emin olun.
-2. Gerekli kütüphaneyi yükleyin:
+1. Ensure Python is installed.
+2. Install the required library:
    ```bash
    pip install pygame
    ```
-3. Oyunu başlatın:
+3. Start the game:
    ```bash
    python main.py
    ```
 
-## Proje Yapısı
+## Project Structure
 
-### 1. `snake_ll.py` (Linked List Implementasyonu)
-Yılanın gövdesi, dinamik bir veri yapısı olan **Singly Linked List** ile temsil edilmiştir.
-- **Node Sınıfı:** Her bir yılan parçasını (koordinatlarını) ve bir sonraki parçayı (`next`) tutar.
-- **SnakeLinkedList Sınıfı:**
-    - `head`: Yılanın başı (hareket yönüne göre yeni node eklenen yer).
-    - `tail`: Yılanın kuyruğu (her adımda silinen yer).
-    - `move()`: Başa yeni bir düğüm ekler (Head Insertion) ve eğer yem yenmediyse kuyruğu siler (Tail Deletion). Bu işlem **O(1)** karmaşıklığında yapılmaya çalışılır (kuyruk pointer'ı tutarak).
-    - `grow()`: Yılanın büyümesini sağlar (kuyruk silme işlemini bir adım atlar).
+### 1. `snake_ll.py` (Linked List Implementation)
+The snake's body is represented by a dynamic data structure, the **Singly Linked List**.
+- **Node Class:** Holds each snake segment (coordinates) and a reference to the next segment (`next`).
+- **SnakeLinkedList Class:**
+    - `head`: The head of the snake (where new nodes are added based on movement direction).
+    - `tail`: The tail of the snake (removed at each step).
+    - `move()`: Adds a new node to the head (Head Insertion) and, if no food was eaten, removes the tail (Tail Deletion). This attempts to be done in **O(1)** complexity (for insertion).
+    - `grow()`: Allows the snake to grow (skips the tail deletion step for one move).
 
-### 2. `game_logic.py` (Oyun Mantığı)
-Oyunun kuralları burada işlenir.
-- **Game Sınıfı:**
-    - `spawn_food()`: Yılanın üzerine gelmeyecek şekilde rastgele yem oluşturur.
-    - `check_collisions()`: Duvarlara veya yılanın kendisine çarpıp çarpmadığını kontrol eder.
-    - `update()`: Oyun döngüsünün mantıksal güncelleme adımıdır.
-    - **Seviye Sistemi:** Her 50 puanda bir seviye artar ve oyun hızı (`FPS`) yükselir.
-    - **High Score:** `high_score.json` dosyasında en yüksek skor saklanır.
+### 2. `game_logic.py` (Game Logic)
+The game rules are processed here.
+- **Game Class:**
+    - `spawn_food()`: Generates random food ensuring it doesn't appear on the snake's body.
+    - `check_collisions()`: Checks for collisions with walls or the snake itself.
+    - `update()`: The logical update step of the game loop.
+    - **Level System:** Level increases every 50 points, increasing the game speed (`FPS`).
+    - **High Score:** The highest score is stored in the `high_score.json` file.
 
-### 3. `utils.py` (Sabitler)
-Oyunun renkleri, ekran boyutları ve yön vektörleri gibi sabit değerler burada tutulur. Bu sayede tasarım değişiklikleri tek bir dosyadan yönetilebilir.
+### 3. `utils.py` (Constants)
+Constant values such as game colors, screen dimensions, and direction vectors are kept here. This allows design changes to be managed from a single file.
 
-## Algoritma Detayları
+## Algorithm Details
 
-### Neden Linked List?
-Yılan oyunu, veri yapısı derslerinde **Queue (Kuyruk)** veya **Linked List** mantığını anlatmak için mükemmel bir örnektir.
-- Yılan hareket ettiğinde, aslında baş tarafına yeni bir kare eklenir ve kuyruk tarafından bir kare silinir.
-- Array (Dizi) kullansaydık, her adımda tüm elemanları kaydırmak (shifting) gerekebilirdi, bu da performans kaybı yaratırdı.
-- Linked List ile eleman ekleme ve çıkarma işlemleri pointer değişimi ile hızlıca yapılır.
+### Why Linked List?
+The Snake game is an excellent example to demonstrate **Queue** or **Linked List** logic in data structures courses.
+- When the snake moves, a new square is effectively added to the head, and a square is removed from the tail.
+- If we used an Array (List), we might need to shift all elements at each step, which would cause performance loss.
+- With a Linked List, adding and removing elements is done quickly via pointer changes.
 
-### Animasyon ve Görsellik
-Pygame'in çizim kütüphanesi kullanılarak grid tabanlı ancak göze hoş gelen bir tasarım yapılmıştır.
-- **Renkler:** Google'ın Snake oyunundan esinlenilen yumuşak ve canlı renkler kullanılmıştır.
-- **Gözler:** Yılanın hangi yöne gittiğini belli eden gözler eklenmiştir.
+### Animation and Visuals
+A grid-based but visually appealing design was created using Pygame's drawing library.
+- **Colors:** Soft and vibrant colors inspired by Google's Snake game were used.
+- **Eyes:** Eyes were added to indicate the direction the snake is moving.
 
-## Geliştirici Notları
-Öğrenci projesi olduğu için kodlar modüler ve okunabilir tutulmuştur. Her fonksiyonun üzerinde ne işe yaradığına dair açıklama satırları (docstring) bulunmaktadır.
+## Developer Notes
+Since this is a student project, the code has been kept modular and readable. Each function has documentation strings (docstrings) explaining what it does.
